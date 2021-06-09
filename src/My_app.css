@@ -1,0 +1,23 @@
+
+
+.cat {
+  height: 20vmin;
+  pointer-events: none;
+}
+.example {
+  transition:top 2s,
+             left 2s;
+
+}
+.errorMessage {
+    width:230px;
+    color:red;
+    border:1px solid red;
+    text-align:center;
+}
+.success {
+    width:230px;
+    color:green;
+    border:1px solid green;
+    text-align:center;
+}
