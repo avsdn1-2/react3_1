@@ -1,6 +1,7 @@
 
 import './App.css';
 import './My_app.css';
+import Cat from './Cat.js'
 import Request from "./Request";
 import React from "react";
 
@@ -12,7 +13,7 @@ function App() {
 
       <header className="App-header">
 
-        <Request/>
+        <Cat/>
 
       </header>
 
