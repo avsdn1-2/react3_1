@@ -24,7 +24,16 @@ class Request extends PureComponent {
     handleSubmit = (e) => {
         e.preventDefault();
         let isErrorForm = this.checkErrorForm();
-        //alert(!this.state.errors.form);
+
+        this.setState((state, props) => {
+            return {
+                isFormSent: true,
+                errors: {
+                    ...this.state.errors,
+                    form: isErrorForm
+                }
+            };});
+
         if (!isErrorForm) {
             axios.post("https://60bb880442e1d00017620c95.mockapi.io/Posts/", {
                 id: this.state.id,
@@ -85,14 +94,6 @@ class Request extends PureComponent {
     };
     checkErrorForm = (e) => {
         let isErrorForm = this.state.errors.title || this.state.errors.body;
-        this.setState((state, props) => {
-              return {
-                  isFormSent: true,
-                  errors: {
-                      ...this.state.errors,
-                      form: isErrorForm
-                  }
-              };});
         return isErrorForm;
         }
 
@@ -106,9 +107,6 @@ class Request extends PureComponent {
           if (error == null) {
               id = parseInt(data[data.length - 1].id) + 1;
           }
-
-
-          setTimeout(() => {
             this.setState({
                 id: id,
                 errors: {
@@ -116,7 +114,6 @@ class Request extends PureComponent {
                     get:false
                 },
             });
-          }, 1000);
         })
         .catch((error) => {
           this.setState({
@@ -130,8 +127,6 @@ class Request extends PureComponent {
   }
 
   render() {
-
-    //  console.log(this.state);
 
     return (
         <div className="example">
@@ -154,31 +149,11 @@ class Request extends PureComponent {
                                aria-describedby="basic-addon1"/>
                     </div>
 
-
-
                     <input className="btn btn-primary" style={{ margin:"10px 0 0 0" }} type="submit"  value="Отправить"/>
 
                 </div>
             </form>
 
-
-
-
-
-
-          {/*isLoading ? (
-              <div>Loading...</div>
-          ) : (
-              <div>
-                {error !== null ? (
-                    <div>Error! {error}</div>
-                ) : (
-                    <div>{data && data.map((el) => (
-                        <div key={el.id}>{el.title}</div>
-                    ))}</div>
-                )}
-              </div>
-          )*/}
         </div>
     );
   }
